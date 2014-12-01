@@ -1,28 +1,12 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# OSX
+.DS_Store
 
-# Precompiled Headers
-*.gch
-*.pch
+# Xcode
+*.xcworkspace
+xcuserdata
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Node.js
+node_modules/
 
-# Fortran module files
-*.mod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+# OpenFrameoworks
+bin/
