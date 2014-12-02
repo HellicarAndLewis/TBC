@@ -11,6 +11,9 @@ class ofApp : public ofBaseApp {
 struct client {
   std::string name;
   ofVec2f position;
+    //added color field
+    ofColor color;
+    
 };
 
 public:

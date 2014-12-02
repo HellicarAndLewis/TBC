@@ -11,6 +11,8 @@ var clientName = prompt("Name", "Smith");
 var port = 9090;
 var WebSocket = window.WebSocket || window.MozWebSocket;
 var websocket = new WebSocket("ws://127.0.0.1:" + port);
+var clickSocket = new WebSocket("ws://127.0.0.1:" + port);
+var locs = [];
 
 websocket.onopen = function() {
   console.log("on open");
@@ -21,7 +23,24 @@ websocket.onerror = function() {
 };
 
 websocket.onmessage = function(message) {
-  console.log("on message", message.data);
+	context.clearRect(0, 0, canvas.width, canvas.height);
+  console.log("on message " + message.data);
+  //first split messages on commas, then on spaces
+  var messages = message.data.split(",");
+  messages.pop();
+  for(var i = 0; i < messages.length; i++)
+  {
+  	var vals = messages[i].split(" ");
+  	var pos = {
+  		x: vals[0],
+  		y: vals[1]
+  	};
+  	pos.x *= canvas.width;
+  	pos.y *= canvas.height;
+  	//draw 1 circle for each client whenever the server sends a message 
+  	//which is every time the servers draw loop is called
+  	drawCircle(pos, 14);
+  }
 };
 
 /*
@@ -42,8 +61,6 @@ window.addEventListener("resize", resizeCanvas);
 
 // there should be draw loop with requestAnimationFrame, etc. but for simple drawing this should be ok
 var drawCircle = function(pos, radius) {
-  context.clearRect(0, 0, canvas.width, canvas.height);
-
   context.beginPath();
   context.arc(pos.x, pos.y, radius, 0, 2 * Math.PI, false);
   context.fillStyle = "black";
@@ -63,7 +80,22 @@ canvas.addEventListener("mousemove", function(e) {
   };
 
   // send normalized position (0-1), so we can scale it to oF window without problems
-  websocket.send(clientName + "," + normalized.x + "," + normalized.y);
+  websocket.send("moved," + clientName + "," + normalized.x + "," + normalized.y);
+  //no longer draws circles here
+}, false);
 
-  drawCircle(pos, 14);
+//handle mouse clicks
+canvas.addEventListener("mousedown", function(e) {
+	var pos = {
+    x: e.clientX,
+    y: e.clientY
+  };
+
+  var normalized = {
+    x: pos.x / window.innerWidth,
+    y: pos.y / window.innerHeight
+  };
+
+  //send normalized position (0-1), so we can scale it to the oF window without problems
+  websocket.send("clicked," + clientName + "," + normalized.x + "," + normalized.y);
 }, false);
