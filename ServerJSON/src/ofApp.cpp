@@ -17,17 +17,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    ofxJSONElement message;
-    vector<client> clients;
-    int i = 0;
-    for(map<ofxLibwebsockets::Connection*, client>::iterator mapIt = clientPositions->begin(); mapIt != clientPositions->end(); ++mapIt)
-    {
-        message[i]["name"] = mapIt->second.name;
-        message[i]["x"] = mapIt->second.position.x;
-        message[i]["y"] = mapIt->second.position.y;
-        i++;
-    }
-    server.send(message.getRawString());
+
 }
 
 //--------------------------------------------------------------
@@ -83,6 +73,18 @@ void ofApp::onMessage(ofxLibwebsockets::Event &args) {
         
         (*clientPositions)[&args.conn] = tmpClient;
     }
+    
+    ofxJSONElement message;
+    vector<client> clients;
+    int i = 0;
+    for(map<ofxLibwebsockets::Connection*, client>::iterator mapIt = clientPositions->begin(); mapIt != clientPositions->end(); ++mapIt)
+    {
+        message[i]["name"] = mapIt->second.name;
+        message[i]["x"] = mapIt->second.position.x;
+        message[i]["y"] = mapIt->second.position.y;
+        i++;
+    }
+    server.send(message.getRawString());
 }
 
 //--------------------------------------------------------------
