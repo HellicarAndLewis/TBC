@@ -75,7 +75,6 @@ void ofApp::onMessage(ofxLibwebsockets::Event &args) {
     }
     
     ofxJSONElement message;
-    vector<client> clients;
     int i = 0;
     for(map<ofxLibwebsockets::Connection*, client>::iterator mapIt = clientPositions->begin(); mapIt != clientPositions->end(); ++mapIt)
     {
