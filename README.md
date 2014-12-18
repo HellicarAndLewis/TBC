@@ -15,3 +15,7 @@ Requires [ofxJSON](https://github.com/jefftimesten/ofxJSON)
 
 Clicking changes each circle's color on the server and on the client'
 
+# Notes
+
+Ensure if you are using the project generator to add the addons, you must delete the jsoncpp file inside ofxJSON lib folder because there is another copy in ofxLibwebsockets and it won't compile if both of them are there.
+
