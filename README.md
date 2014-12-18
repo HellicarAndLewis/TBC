@@ -1,6 +1,8 @@
 # Simple websockets example
 
 Requires [ofxLibwebsockets](https://github.com/labatrockwell/ofxLibwebsockets)
+Requires [ofxJSON](https://github.com/jefftimesten/ofxJSON)
+
 
 # Running
 
