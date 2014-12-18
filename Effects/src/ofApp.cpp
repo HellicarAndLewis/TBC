@@ -7,7 +7,7 @@ void ofApp::setup(){
     image.allocate(ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
     for(int i = 0; i < 100; i++)
     {
-        pillars.push_back(Pillar(40*i + 1, ofGetHeight()/2, 20, ofRandom(200)));
+        pillars.push_back(Pillar(40*i + 1, ofGetHeight()/2, 30, ofRandom(200)));
     }
     //ofEnableDepthTest();
 }
@@ -34,7 +34,10 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    for(int i = 0; i < pillars.size(); i++)
+    {
+        pillars[i].setHeight(ofRandom(200));
+    }
 }
 
 //--------------------------------------------------------------

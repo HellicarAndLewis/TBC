@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A413B8B1A3740FB005F9E55 /* pillar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A413B891A3740FB005F9E55 /* pillar.cpp */; };
+		1A5497241A42F67F008200FF /* Integrator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A5497221A42F67F008200FF /* Integrator.cpp */; };
 		1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 907C5B5E104864A2D3A25745 /* ofxToggle.cpp */; };
 		483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78D67A00EB899FAC09430597 /* ofxLabel.cpp */; };
 		5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C88333E71C9457E441C33474 /* ofxButton.cpp */; };
@@ -79,6 +80,8 @@
 		17E65988300FBD9AAA2CD0CA /* ofxGui.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxGui.h; path = ../../../addons/ofxGui/src/ofxGui.h; sourceTree = SOURCE_ROOT; };
 		1A413B891A3740FB005F9E55 /* pillar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pillar.cpp; sourceTree = "<group>"; };
 		1A413B8A1A3740FB005F9E55 /* pillar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pillar.h; sourceTree = "<group>"; };
+		1A5497221A42F67F008200FF /* Integrator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Integrator.cpp; sourceTree = "<group>"; };
+		1A5497231A42F67F008200FF /* Integrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Integrator.h; sourceTree = "<group>"; };
 		1C0DA2561397A7DE0246858B /* ofxGuiGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxGuiGroup.h; path = ../../../addons/ofxGui/src/ofxGuiGroup.h; sourceTree = SOURCE_ROOT; };
 		21BDE665988474F1B1F4D302 /* jsoncpp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = jsoncpp.cpp; path = ../../../addons/ofxJSON/libs/jsoncpp/src/jsoncpp.cpp; sourceTree = SOURCE_ROOT; };
 		26A541233BC6F736E758F718 /* ofxJSONElement.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxJSONElement.h; path = ../../../addons/ofxJSON/src/ofxJSONElement.h; sourceTree = SOURCE_ROOT; };
@@ -320,6 +323,8 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				1A413B891A3740FB005F9E55 /* pillar.cpp */,
 				1A413B8A1A3740FB005F9E55 /* pillar.h */,
+				1A5497221A42F67F008200FF /* Integrator.cpp */,
+				1A5497231A42F67F008200FF /* Integrator.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -432,6 +437,7 @@
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,
 				5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */,
+				1A5497241A42F67F008200FF /* Integrator.cpp in Sources */,
 				B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */,
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,

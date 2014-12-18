@@ -4,6 +4,10 @@
 
 var clientName = prompt("Name", "Smith");
 
+var clientColor;
+
+var clientId = new Date();
+
 /*
  * websockets
  */
@@ -22,14 +26,16 @@ websocket.onerror = function() {
 };
 
 websocket.onmessage = function(message) {
-  clients = [];
-  var parsedMessage = JSON.parse(message.data);
 
-  for(var i = 0; i < parsedMessage.length; i++)
-  {
-    clients.push(parsedMessage[i]);
-  }
-};
+  clients = JSON.parse(message.data);
+
+  clients.forEach(function(client) {
+    if(client.name === clientName)
+    {
+        clientColor = client.color;
+    }
+  });
+}
 
 /*
  * canvas
@@ -48,50 +54,55 @@ resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
 // there should be draw loop with requestAnimationFrame, etc. but for simple drawing this should be ok
-var drawCircle = function(pos, radius) {
+var drawCircle = function(x, y, radius, color) {
   context.beginPath();
-  context.arc(pos.x, pos.y, radius, 0, 2 * Math.PI, false);
-  context.fillStyle = "black";
+  context.arc(x, y, radius, 0, 2 * Math.PI, false);
+  context.fillStyle = color;
   context.fill();
 };
 
 function draw() {
-  requestAnimationFrame(draw);
   context.clearRect(0, 0, canvas.width, canvas.height);
-  for(var i = 0; i < clients.length; i++)
-  {
-    var pos = {
-      x: clients[i].x*window.innerWidth,
-      y: clients[i].y*window.innerHeight
-    };
-    drawCircle(pos, 14);
-  }
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  clients.map(function(client) {
+      return { x: client.x * width, y: client.y * height, color: client.color};
+    })
+    .forEach(function(client) {
+      var hexString = "#" + client.color.toString(16);
+      drawCircle(client.x, client.y, 14, hexString);      
+    });
+  requestAnimationFrame(draw);
 }
 
 draw();
 
 // handle mouse movement
 canvas.addEventListener("mousemove", function(e) {
+  sendMessage(e, false);
+}, false);
+
+canvas.addEventListener("mousedown", function(e) {
+  sendMessage(e, true);
+}, false);
+
+var sendMessage = function(e, clicked)
+{
   var pos = {
     x: e.clientX,
     y: e.clientY
   };
 
-  var normalized = {
-    x: pos.x / window.innerWidth,
-    y: pos.y / window.innerHeight
-  };
-
   var message = {
+    id: clientId,
     name: clientName,
     x: pos.x / window.innerWidth,
-    y: pos.y / window.innerHeight
+    y: pos.y / window.innerHeight,
+    clicked: clicked,
+    color: clientColor
   }
 
-  clients.push(message)
-
   var validMessage = JSON.stringify(message);
-  // send normalized position (0-1), so we can scale it to oF window without problems
-  // websocket.send(clientName + "," + normalized.x + "," + normalized.y);
   websocket.send(validMessage);
-}, false);
+}
